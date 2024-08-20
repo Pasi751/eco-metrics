@@ -1,0 +1,103 @@
+<h2>Dashboard</h2>
+<div class="container mt-4">
+  <h2>Overview</h2>
+
+  <div class="header mb-4">
+    <h6>Track and reduce CO2 emissions from your computing</h6>
+    <div class="form-group-group">
+      <div class="form-group">
+        <input type="date" id="startDate" [(ngModel)]="startDate" class="form-control form-control-sm">
+      </div>
+      <div class="arrow-container">
+        <span class="arrow">→</span>
+      </div>
+      <div class="form-group">
+        <input type="date" id="endDate" [(ngModel)]="endDate" class="form-control form-control-sm">
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="radio" name="application" [(ngModel)]="selectedApplication" value="StudentManagement">
+          <label for="StudentManagement" class="radio-label">Project 1</label>
+          <input type="radio" name="application" [(ngModel)]="selectedApplication" value="EmploymentManagement">
+          <label for="EmploymentManagement" class="radio-label">Project 2</label>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-sm" (click)="fetchMetrics()">Get Metrics</button>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="progress-circles">
+      <div class="circle-container">
+        <h4>CPU Usage</h4>
+        <div class="progress-circle">
+          <ng-circular-progressbar [value]="metrics.cpuUsage" [text]="metrics.cpuUsage + '%'" [styles]="getStyles(metrics.cpuUsage)"></ng-circular-progressbar>
+        </div>
+      </div>
+      <div class="circle-container">
+        <h4>RAM Usage</h4>
+        <div class="progress-circle">
+          <ng-circular-progressbar [value]="metrics.ramUsagePercentage" [text]="metrics.ramUsagePercentage + '%'" [styles]="getStyles(metrics.ramUsagePercentage)"></ng-circular-progressbar>
+        </div>
+      </div>
+      <div class="circle-container">
+        <h4>VRAM Usage</h4>
+        <div class="progress-circle">
+          <ng-circular-progressbar [value]="metrics.vramUsage" [text]="metrics.vramUsage + '%'" [styles]="getStyles(metrics.vramUsage)"></ng-circular-progressbar>
+        </div>
+      </div>
+      <div class="circle-container">
+        <h4>Energy Consumption</h4>
+        <div class="progress-circle">
+          <ng-circular-progressbar [value]="metrics.energyConsumption" [text]="metrics.energyConsumption + ' kWh'" [styles]="getStyles(metrics.energyConsumption)"></ng-circular-progressbar>
+        </div>
+      </div>
+      <div class="circle-container">
+        <h4>Carbon Footprint</h4>
+        <div class="progress-circle">
+          <ng-circular-progressbar [value]="metrics.carbonFootprintPrecentage" [text]="metrics.carbonFootprintPrecentage + ' kgco2'" [styles]="getStyles(metrics.carbonFootprintPrecentage)"></ng-circular-progressbar>
+        </div>
+      </div>
+    </div>
+
+    <div class="svg-global-container">
+      <div class="global-section-section">
+        <h4>Global</h4>
+        <div class="global-section">
+        <div class="global-item">
+          <div class="glb-tag-name">Energy Consumed</div> 
+          <div class="glb-tag">{{ globalMetrics.energyConsumed }}</div>
+          <span class="glb-tag-tag">kWh</span>
+        </div>
+        <div class="global-item">
+          <div class="glb-tag-name">Emissions Produced</div> 
+          <div class="glb-tag">{{ globalMetrics.emissionsProduced }}</div>
+          <span class="glb-tag-tag">kg CO2</span>
+        </div>
+        <div class="global-item">
+          <div class="glb-tag-name">Cumulative Duration</div> 
+          <div class="glb-tag">{{ globalMetrics.cumulativeDuration }}</div>
+          <span class="glb-tag-tag">hours</span>
+        </div>
+      </div>
+      </div>
+      <div class="svg-img">
+        <div class="img-container">
+          <img src="assets/car.png" alt="Car">
+          <div>Miles Driven</div>
+          <div class="img-tag">{{ carMiles }} <span class="glb-tag-tag">miles</span></div>
+        </div>
+        <div class="img-container">
+          <img src="assets/home.png" alt="House">
+          <div>Household Energy</div>
+          <div class="img-tag">{{ householdEnergy }} <span class="glb-tag-tag">kWh</span></div>
+        </div>
+        <div class="img-container">
+          <img src="assets/tv.png" alt="TV">
+          <div>TV Hours</div>
+          <div class="img-tag">{{ tvHours }} <span class="glb-tag-tag">hours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
